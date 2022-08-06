@@ -16,6 +16,12 @@ public class NavigationSteps {
     @Then("the user is logged into the system successfully")
     public void theUserIsLoggedIntoTheSystemSuccessfully() {
         String username = scenarioContext.getContext("username", String.class);
-        assertThat("verify username: ", username, equalTo(navigationPage.getUsername()));
+        assertThat("verify username: ", navigationPage.getUsername(), equalTo(username));
+    }
+
+    @Then("all the information of project is shown")
+    public void allTheInformationOfProjectIsShown() {
+        String projectName = scenarioContext.getContext("projectName", String.class);
+        assertThat("verify prject name: ", navigationPage.getProjectName(), equalTo(projectName));
     }
 }

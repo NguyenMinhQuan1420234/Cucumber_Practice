@@ -1,3 +1,4 @@
+@login
 Feature: login
   As valid user, I would like to log into the application
 

@@ -2,6 +2,7 @@ package com.tms.cucumber.steps;
 
 import com.tms.cucumber.pages.LoginPage;
 import com.tms.cucumber.context.ScenarioContext;
+import com.tms.cucumber.pages.NavigationPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,7 +16,12 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class LoginSteps {
     LoginPage loginPage = new LoginPage();
-    ScenarioContext scenarioContext = new ScenarioContext();
+    NavigationPage navigationPage = new NavigationPage();
+    ScenarioContext scenarioContext;
+
+    public LoginSteps(ScenarioContext context) {
+        scenarioContext = context;
+    }
     @Given("the user visits the TMS website")
     public void theUserVisitsTheTMSWebsite() {
         loginPage.navigate(System.getProperty("LOGIN_URL"));
@@ -70,6 +76,11 @@ public class LoginSteps {
 
     @And("the user logs into the system with admin account successfully")
     public void theUserLogsIntoTheSystemWithAdminAccountSuccessfully() {
+        loginPage.loginWithDefaultAccount();
+    }
+
+    @And("the user is logged into the system with admin account")
+    public void theUserIsLoggedIntoTheSystemWithAdminAccount() {
         loginPage.loginWithDefaultAccount();
     }
 }

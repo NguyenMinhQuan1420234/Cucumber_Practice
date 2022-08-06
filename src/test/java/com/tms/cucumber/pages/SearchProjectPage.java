@@ -31,7 +31,7 @@ public class SearchProjectPage extends BasePage {
     public static final By SEARCH_RESULT_NAME = By.xpath("//a[contains(text(),'%s')]");
     public static final By HTML = By.cssSelector("html[ng-app='TMS']");
     public static final By TITLE = By.xpath("//b[@class='ng-binding']");
-
+    public static final By ITEMS_PER_PAGE = By.xpath("//div[@ui-view='projectsresult']//tr[@total-items]");
 
     public void searchProjectName(String username) {
         inputText(TXT_PROJECT_NAME, username);

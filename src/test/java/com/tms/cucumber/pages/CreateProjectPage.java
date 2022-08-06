@@ -46,7 +46,7 @@ public class CreateProjectPage extends BasePage {
 
     /**---------------Method-----------**/
 
-    public void clickCreateProjectDropdownList() {
+    public void clickCreateProjectOptionFromDropdownList() {
         clickElement(BTN_DROPDOWN_PROJECT);
         clickElement(OPT_CREATE_PROJECT);
     }
@@ -65,57 +65,55 @@ public class CreateProjectPage extends BasePage {
         waitForElementToBeVisible(ALT_MSG);
     }
 
-    public void elementSelectByIndex(By locator, int number) {
-        Select element = elementSelect(locator);
-        element.selectByIndex(number);
-    }
-
-    public void elementSelectByValue(By locator, String value) {
-        Select element = elementSelect(locator);
-        element.selectByValue(value);
-    }
-
-    public void elementSelectByVisibleText(By locator, String text) {
-        Select element = elementSelect(locator);
-        element.selectByVisibleText(text);
-    }
 
     public void inputTextBox(By locator, String text) {
         inputText(locator, text);
     }
 
-    public String createProjectNameUnique() {
-        LocalTime date = java.time.LocalTime.now();
-        String projectName =  "quannguyen-practice-UI-Automation" + date;
-        return projectName;
+
+    public void inputProjectName(String text) {
+        inputTextBox(TXT_PROJECT_NAME, text);
+    }
+    public void inputSizeday(Integer day) {
+        inputTextBox(TXT_SIZEDAY, Integer.toString(day));
+    }
+    public void inputShortDescription(String text) {
+        inputTextBox(TXT_SHORT_DESCRIPTION, text);
+    }
+    public void inputLongDescription(String text) {
+        inputTextBox(TXT_LONG_DESCRIPTION, text);
+    }
+    public void inputTechnologies(String text) {
+        inputTextBox(TXT_TECHNOLOGIES, text);
+    }
+    public void inputClientname(String text) {
+        inputTextBox(TXT_CLIENTNAME, text);
+    }
+    public void inputClientDescription(String text) {
+        inputTextBox(TXT_CLIENT_DESCRIPTION, text);
+    }
+    public void selectProjectStatus(String text) {
+        elementSelectByVisibleText(DDL_PROJECT_STATUS,text);
+    }
+    public void selectProjectType(String text) {
+        elementSelectByVisibleText(DDL_PROJECT_TYPE,text);
+    }
+    public void selectProjectLocation(String text) {
+        elementSelectByVisibleText(DDL_LOCATION,text);
+    }
+    public void selectProjectManager(String text) {
+        elementSelectByVisibleText(DDL_PROJECT_MANAGER,text);
+    }
+    public void selectProjectDelieveryManager(String text) {
+        elementSelectByVisibleText(DDL_DELIVERY_MANAGER,text);
+    }
+    public void selectProjectEngagementManager(String text) {
+        elementSelectByVisibleText(DDL_ENGAGEMENT_MANAGER,text);
+    }
+    public void selectProjectClientIndustry(String text) {
+        elementSelectByVisibleText(DDL_CLIENT_INDUSTRY,text);
     }
 
-    public void inputProjectName(String projectName) {
-        inputTextBox(TXT_PROJECT_NAME, projectName);
-    }
 
-    public void inputSizeday(String day) {
-
-    }
-    public void fillProjectInfomation(String projectname) {
-
-        inputTextBox(TXT_PROJECT_NAME, projectname);
-        inputTextBox(TXT_SIZEDAY, "1");
-//        inputTextBox(TXT_SHORT_DESCRIPTION, ConfigConstants.TXT_INPUT);
-//        inputTextBox(TXT_LONG_DESCRIPTION, ConfigConstants.TXT_INPUT);
-//        inputTextBox(TXT_TECHNOLOGIES, ConfigConstants.TXT_INPUT);
-//        inputTextBox(TXT_CLIENTNAME, ConfigConstants.TXT_INPUT);
-//        inputTextBox(TXT_CLIENT_DESCRIPTION, ConfigConstants.TXT_INPUT);
-    }
-
-    public void selectProjectValue() { // need more detail value of dropdownlist
-        elementSelectByIndex(DDL_PROJECT_STATUS, 1);
-        elementSelectByIndex(DDL_PROJECT_TYPE, 1);
-        elementSelectByIndex(DDL_LOCATION, 1);
-        elementSelectByIndex(DDL_PROJECT_MANAGER, 1);
-        elementSelectByIndex(DDL_DELIVERY_MANAGER, 1);
-        elementSelectByIndex(DDL_ENGAGEMENT_MANAGER, 1);
-        elementSelectByIndex(DDL_CLIENT_INDUSTRY, 1);
-    }
 }
 

@@ -94,5 +94,18 @@ public class BasePage {
         }
         return result;
     }
+    public void elementSelectByIndex(By locator, int number) {
+        Select element = elementSelect(locator);
+        element.selectByIndex(number);
+    }
+    public void elementSelectByValue(By locator, String value) {
+        Select element = elementSelect(locator);
+        element.selectByValue(value);
+    }
+    public void elementSelectByVisibleText(By locator, String text) {
+        clickElement(locator);
+        Select element = elementSelect(locator);
+        element.selectByVisibleText(text);
+    }
 }
 

@@ -4,6 +4,12 @@ import com.tms.cucumber.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import static java.lang.Thread.sleep;
+
 public class DatePickerPage extends BasePage {
 
     public static final By BTN_SDATE_PICKER = By.xpath("//button[@ng-click='pcC.openSDatePicker()']");
@@ -32,17 +38,21 @@ public class DatePickerPage extends BasePage {
         return getText(BTN_YEAR_RANGE).split(" - ");
     }
 
-    public void sdayOpen() {
+    public void inputStartDay(String date) throws InterruptedException {
         clickElement(BTN_SDATE_PICKER); // open start DatePicker
-
+        datePicker(date);
     }
 
-    public void edayOpen() {
+    public void inputEndDay(String date) throws InterruptedException {
         clickElement(BTN_EDATE_PICKER); // open end DatePicker
-
+        datePicker(date);
     }
 
-    public void datePicker(String year, String month, String day) {
+    public void datePicker(String date) throws InterruptedException {
+        String[] dateValue = date.split("-");
+        String day = dateValue[0];
+        String month = dateValue[1];
+        String year = dateValue[2];
 
         clickElement(BTN_MONTH_YEAR); // go to Month
         clickElement(BTN_MONTH_YEAR); // go to year range
@@ -52,8 +62,7 @@ public class DatePickerPage extends BasePage {
         // int a = Integer.parseInt(year);
         // System.out.println(a);
 
-        while(!((Integer.parseInt(year) > Integer.parseInt(yearRange[0]) &&
-                (Integer.parseInt(year))< Integer.parseInt(yearRange[1])))) {
+        while((Integer.parseInt(year) < Integer.parseInt(yearRange[0]) || (Integer.parseInt(year)) > Integer.parseInt(yearRange[1])) ) {
             if (Integer.parseInt(year) < Integer.parseInt(yearRange[0]))
                 clickElement(BTN_PREVIOUS_20_YEAR_BUTTON);
             else
