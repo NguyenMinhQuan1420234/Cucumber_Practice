@@ -7,6 +7,6 @@
     And the user navigate the Search Project page
     When the user applies some search criteria Name or Location or Type
     |projectName|location|type|
-    |quan      |All     |All   |
+    |aaa     |All     |All   |
     And the user clicks on Search button
     Then all projects matched with input criteria will be displayed

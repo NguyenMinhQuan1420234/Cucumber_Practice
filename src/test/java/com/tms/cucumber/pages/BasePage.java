@@ -117,12 +117,6 @@ public class BasePage {
             return false;
         }
     }
-    public boolean isElementEnabled(By locator) {
-        return waitForElementToBeVisible(locator).isEnabled();
-    }
-    public void isListOfElementVisible(By locator){
-        waitForListOfElementToBeVisible(locator);
-    }
 
     public ArrayList<String> getTextOfListElement(By locator) {
          List<WebElement> Elements = waitForListOfElementToBeVisible(locator);
@@ -131,6 +125,19 @@ public class BasePage {
              list.add(element.getText());
          }
          return list;
+    }
+    public boolean isElementClickable(By locator) {
+        try {
+            waitForElementToBeClickable(locator);
+            return true;
+        }
+        catch(TimeoutException e) {
+            return false;
+        }
+    }
+    public String getTextOfElementAttribute(By locator, String tag) {
+        WebElement element = waitForElementToBeVisible(locator);
+        return element.getAttribute(tag);
     }
 }
 

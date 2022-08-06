@@ -33,7 +33,7 @@ public class SearchProjectPage extends BasePage {
     public static final By PROJECT_LOCATION_TABLE_DATA = By.xpath("//div[@ui-view='projectsresult']//td[6]");
     public static final By TOTAL_PAGE = By.xpath("(//a[@ng-click='setCurrent(pageNumber)'])[last()]");
     public static final By BTN_NEXT_PAGE = By.xpath("//a[@ng-click='setCurrent(pagination.current + 1)']");
-
+    public static final By BTN_NEXT_PAGE_STATUS = By.xpath("//a[@ng-click='setCurrent(pagination.current + 1)']/..");
 
     public void clickSearchMenu() {
         clickElement(BTN_DROPDOWN_PROJECT);
@@ -67,7 +67,7 @@ public class SearchProjectPage extends BasePage {
     public void verifyProjectInDataTable(String expectedProjectName, String expectedLocation, String expectedType) {
 
         while(isElementDisplayed(ITEMS_PER_PAGE)) {
-            isListOfElementVisible(PROJECT_NAME_TABLE_DATA);
+            isElementDisplayed(PROJECT_NAME_TABLE_DATA);
             List<String> listNameOfProjects = getTextOfListElement(PROJECT_NAME_TABLE_DATA);
             List<String> listProjectLocation = getTextOfListElement(PROJECT_LOCATION_TABLE_DATA);
             List<String> listProjectType = getTextOfListElement(PROJECT_TYPE_TABLE_DATA);
@@ -75,7 +75,7 @@ public class SearchProjectPage extends BasePage {
             for(String name: listNameOfProjects) {
                 assertThat(
                     "verify project name match criteria: ",
-                    name,
+                    name.toLowerCase(),
                     containsString(expectedProjectName)
                 );
             }
@@ -99,10 +99,10 @@ public class SearchProjectPage extends BasePage {
             }
 
             if(isElementDisplayed(BTN_NEXT_PAGE)) {
-                if(isElementEnabled(BTN_NEXT_PAGE))
-                    clickElement(BTN_NEXT_PAGE);
-                else
+                if(getTextOfElementAttribute(BTN_NEXT_PAGE_STATUS, "class").contains("disabled"))
                     break;
+                else
+                    clickElement(BTN_NEXT_PAGE);
             }
             else
                 break;
