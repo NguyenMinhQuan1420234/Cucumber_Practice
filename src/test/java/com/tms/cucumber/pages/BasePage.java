@@ -1,6 +1,7 @@
 package com.tms.cucumber.pages;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -75,6 +76,23 @@ public class BasePage {
         Actions action = new Actions(driver);
         action.moveToElement(element);
         action.perform();
+    }
+
+    public static List<WebElement> findElements(By locator) {
+        return driver.findElements(locator);
+    }
+
+    public static ArrayList<String> getTextOfElements(By locator, Boolean moveToElement) {
+        List<WebElement> elements = findElements(locator);
+        ArrayList<String> result = new ArrayList<>();
+        for (WebElement element : elements) {
+            if (moveToElement == Boolean.TRUE) {
+                Actions actionChains = new Actions(driver);
+                actionChains.moveToElement(element).perform();
+            }
+            result.add(element.getText());
+        }
+        return result;
     }
 }
 

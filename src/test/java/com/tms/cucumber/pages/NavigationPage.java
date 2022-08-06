@@ -3,7 +3,7 @@ package com.tms.cucumber.pages;
 import org.openqa.selenium.By;
 
 public class NavigationPage extends BasePage {
-    private static final By LBL_USERNAME = By.xpath("//img[@id='ava']/..");
+    private static final By LBL_USERNAME = By.xpath("//img[@id='ava']//..");
     private static final By LBL_PROJECTS = By.xpath("//a[contains(text(),'Projects')]");
     private static final By LBL_CREATE_PROJECT = By.xpath("//a[text()='Create Project']");
     private static final By LBL_SEARCH_PROJECT = By.xpath("//a[text()='Search Project']");

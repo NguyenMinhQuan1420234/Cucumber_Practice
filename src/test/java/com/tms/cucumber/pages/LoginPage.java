@@ -31,4 +31,10 @@ public class LoginPage extends BasePage {
         clickElement(LNK_FORGOT_PASSWORD);
     }
 
+    public void loginWithDefaultAccount() {
+        navigate(System.getProperty("LOGIN_URL"));
+        inputUsername(System.getProperty("DEFAULT_USERNAME"));
+        inputPassword(System.getProperty("DEFAULT_PASSWORD"));
+        clickLoginBtn();
+    }
 }

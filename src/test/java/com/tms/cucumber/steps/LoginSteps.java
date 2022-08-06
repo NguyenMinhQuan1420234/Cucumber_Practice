@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class LoginSteps {
     LoginPage loginPage = new LoginPage();
-    ScenarioContext scenarioContext;
+    ScenarioContext scenarioContext = new ScenarioContext();
     @Given("the user visits the TMS website")
     public void theUserVisitsTheTMSWebsite() {
         loginPage.navigate(System.getProperty("LOGIN_URL"));
@@ -66,5 +66,10 @@ public class LoginSteps {
                 equalTo(errorMessage)
         );
 
+    }
+
+    @And("the user logs into the system with admin account successfully")
+    public void theUserLogsIntoTheSystemWithAdminAccountSuccessfully() {
+        loginPage.loginWithDefaultAccount();
     }
 }
