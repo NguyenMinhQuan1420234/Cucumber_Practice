@@ -1,9 +1,7 @@
 package com.tms.cucumber.pages;
 
-import java.util.HashMap;
 import java.util.List;
 import java.awt.AWTException;
-import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -13,7 +11,7 @@ import org.openqa.selenium.interactions.WheelInput;
 
 import static com.tms.cucumber.steps.StepHooks.driver;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class SearchProjectPage extends BasePage {
     // drop down list Project option
@@ -68,7 +66,7 @@ public class SearchProjectPage extends BasePage {
 
     public void verifyProjectInDataTable(String expectedProjectName, String expectedLocation, String expectedType) {
 
-        while(isElementDisplayed(TOTAL_PAGE)) {
+        while(isElementDisplayed(ITEMS_PER_PAGE)) {
             isListOfElementVisible(PROJECT_NAME_TABLE_DATA);
             List<String> listNameOfProjects = getTextOfListElement(PROJECT_NAME_TABLE_DATA);
             List<String> listProjectLocation = getTextOfListElement(PROJECT_LOCATION_TABLE_DATA);
@@ -78,26 +76,34 @@ public class SearchProjectPage extends BasePage {
                 assertThat(
                     "verify project name match criteria: ",
                     name,
-                    equalTo(expectedProjectName)
+                    containsString(expectedProjectName)
                 );
             }
-            for(String location: listProjectLocation) {
-                assertThat(
-                        "verify project location match criteria: ",
-                        location,
-                        equalTo(expectedLocation)
-                );
+            if(!(expectedLocation.equals("All"))) {
+                for(String location: listProjectLocation) {
+                    assertThat(
+                            "verify project location match criteria: ",
+                            location,
+                            equalTo(expectedLocation)
+                    );
+                }
             }
-            for(String type: listProjectType) {
-                assertThat(
-                        "verify project type match criteria: ",
-                        type,
-                        equalTo(expectedType)
-                );
+            if(!(expectedLocation.equals("All"))) {
+                for (String type : listProjectType) {
+                    assertThat(
+                            "verify project type match criteria: ",
+                            type,
+                            equalTo(expectedType)
+                    );
+                }
             }
 
-            if(isElementEnabled(BTN_NEXT_PAGE))
-                clickElement(BTN_NEXT_PAGE);
+            if(isElementDisplayed(BTN_NEXT_PAGE)) {
+                if(isElementEnabled(BTN_NEXT_PAGE))
+                    clickElement(BTN_NEXT_PAGE);
+                else
+                    break;
+            }
             else
                 break;
         }

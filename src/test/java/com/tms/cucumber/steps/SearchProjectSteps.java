@@ -13,7 +13,7 @@ import java.util.Map;
 public class SearchProjectSteps {
     SearchProjectPage searchProjectPage = new SearchProjectPage();
     NavigationPage navigationPage = new NavigationPage();
-    ScenarioContext scenarioContext;
+    ScenarioContext scenarioContext = new ScenarioContext();
     @And("the user navigate the Search Project page")
     public void theUserNavigateTheSearchProjectPage() {
         navigationPage.goToSearchProjectPage();
@@ -21,7 +21,7 @@ public class SearchProjectSteps {
 
     @When("the user applies some search criteria Name or Location or Type")
     public void theUserAppliesSomeSearchCriteriaNameOrLocationOrType(List<Map<String, String>> table) {
-        String projectName = table.get(0).get("project name");
+        String projectName = table.get(0).get("projectName");
         String location = table.get(0).get("location");
         String type = table.get(0).get("type");
         scenarioContext.setContext("project name", projectName);

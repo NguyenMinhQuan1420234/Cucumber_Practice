@@ -32,7 +32,6 @@ public class LoginPage extends BasePage {
     }
 
     public void loginWithDefaultAccount() {
-        navigate(System.getProperty("LOGIN_URL"));
         inputUsername(System.getProperty("DEFAULT_USERNAME"));
         inputPassword(System.getProperty("DEFAULT_PASSWORD"));
         clickLoginBtn();

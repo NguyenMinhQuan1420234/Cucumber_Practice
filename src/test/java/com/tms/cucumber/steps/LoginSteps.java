@@ -74,11 +74,6 @@ public class LoginSteps {
 
     }
 
-    @And("the user logs into the system with admin account successfully")
-    public void theUserLogsIntoTheSystemWithAdminAccountSuccessfully() {
-        loginPage.loginWithDefaultAccount();
-    }
-
     @And("the user is logged into the system with admin account")
     public void theUserIsLoggedIntoTheSystemWithAdminAccount() {
         loginPage.loginWithDefaultAccount();
