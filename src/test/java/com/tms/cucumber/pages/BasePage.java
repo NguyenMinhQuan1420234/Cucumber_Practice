@@ -107,5 +107,23 @@ public class BasePage {
         Select element = elementSelect(locator);
         element.selectByVisibleText(text);
     }
+    public boolean isElementDisplayed(By locator) {
+        return driver.findElement(locator).isDisplayed();
+    }
+    public boolean isElementEnabled(By locator) {
+        return waitForElementToBeVisible(locator).isEnabled();
+    }
+    public void isListOfElementVisible(By locator){
+        waitForListOfElementToBeVisible(locator);
+    }
+
+    public ArrayList<String> getTextOfListElement(By locator) {
+         List<WebElement> Elements = waitForListOfElementToBeVisible(locator);
+         ArrayList<String> list = new ArrayList<>();
+         for(WebElement element: Elements) {
+             list.add(element.getText());
+         }
+         return list;
+    }
 }
 

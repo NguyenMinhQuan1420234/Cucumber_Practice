@@ -29,7 +29,7 @@ public class NavigationPage extends BasePage {
         clickElement(LBL_PROJECTS);
         clickElement(LBL_CREATE_PROJECT);
     }
-    public void clickSearchProject() {
+    public void goToSearchProjectPage() {
         clickElement(LBL_PROJECTS);
         clickElement(LBL_SEARCH_PROJECT);
     }

@@ -24,4 +24,5 @@ public class NavigationSteps {
         String projectName = scenarioContext.getContext("projectName", String.class);
         assertThat("verify prject name: ", navigationPage.getProjectName(), equalTo(projectName));
     }
+
 }

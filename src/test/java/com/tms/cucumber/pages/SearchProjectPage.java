@@ -1,21 +1,19 @@
 package com.tms.cucumber.pages;
 
+import java.util.HashMap;
 import java.util.List;
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.security.Key;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput;
-import org.openqa.selenium.interactions.WheelInput.ScrollOrigin;
-import org.openqa.selenium.support.ui.Select;
 
 import static com.tms.cucumber.steps.StepHooks.driver;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class SearchProjectPage extends BasePage {
     // drop down list Project option
@@ -32,22 +30,26 @@ public class SearchProjectPage extends BasePage {
     public static final By HTML = By.cssSelector("html[ng-app='TMS']");
     public static final By TITLE = By.xpath("//b[@class='ng-binding']");
     public static final By ITEMS_PER_PAGE = By.xpath("//div[@ui-view='projectsresult']//tr[@total-items]");
+    public static final By PROJECT_NAME_TABLE_DATA = By.xpath("//div[@ui-view='projectsresult']//a");
+    public static final By PROJECT_TYPE_TABLE_DATA = By.xpath("//div[@ui-view='projectsresult']//td[3]");
+    public static final By PROJECT_LOCATION_TABLE_DATA = By.xpath("//div[@ui-view='projectsresult']//td[6]");
+    public static final By TOTAL_PAGE = By.xpath("(//a[@ng-click='setCurrent(pageNumber)'])[last()]");
+    public static final By BTN_NEXT_PAGE = By.xpath("//a[@ng-click='setCurrent(pagination.current + 1)']");
 
-    public void searchProjectName(String username) {
-        inputText(TXT_PROJECT_NAME, username);
-    }
 
     public void clickSearchMenu() {
         clickElement(BTN_DROPDOWN_PROJECT);
         clickElement(OPT_SEARCH_PROJECT);
     }
 
-    public void inputSearchProjectNameDefault() {
-//        inputText(TXT_PROJECT_NAME, ConfigConstants.PRJ_SEARCH_NAME);
-    }
-
     public void inputSearchProjectName(String text) {
         inputText(TXT_PROJECT_NAME, text);
+    }
+    public void selectLocation(String text) {
+        elementSelectByVisibleText(DDL_LOCATION, text);
+    }
+    public void selectType(String text) {
+        elementSelectByVisibleText(DDL_PROJECT_TYPE, text);
     }
 
     public void clickSearchButton() {
@@ -56,8 +58,55 @@ public class SearchProjectPage extends BasePage {
 
     public List<WebElement> listOfProjectName(By locator) {
         return (List<WebElement>) waitForListOfElementToBeVisible(locator);
+    }
+
+    public void verifyDataFromTable(List<String> data, String searchCriteria) {
+        for(String item: data) {
+            item = searchCriteria;
+        }
+    }
+
+    public void verifyProjectInDataTable(String expectedProjectName, String expectedLocation, String expectedType) {
+
+        while(isElementDisplayed(TOTAL_PAGE)) {
+            isListOfElementVisible(PROJECT_NAME_TABLE_DATA);
+            List<String> listNameOfProjects = getTextOfListElement(PROJECT_NAME_TABLE_DATA);
+            List<String> listProjectLocation = getTextOfListElement(PROJECT_LOCATION_TABLE_DATA);
+            List<String> listProjectType = getTextOfListElement(PROJECT_TYPE_TABLE_DATA);
+
+            for(String name: listNameOfProjects) {
+                assertThat(
+                    "verify project name match criteria: ",
+                    name,
+                    equalTo(expectedProjectName)
+                );
+            }
+            for(String location: listProjectLocation) {
+                assertThat(
+                        "verify project location match criteria: ",
+                        location,
+                        equalTo(expectedLocation)
+                );
+            }
+            for(String type: listProjectType) {
+                assertThat(
+                        "verify project type match criteria: ",
+                        type,
+                        equalTo(expectedType)
+                );
+            }
+
+            if(isElementEnabled(BTN_NEXT_PAGE))
+                clickElement(BTN_NEXT_PAGE);
+            else
+                break;
+        }
+
 
     }
+
+
+
 
     public void zoomOutSearchPage() throws AWTException {
         WebElement textboxSearchProject = driver.findElement(TXT_PROJECT_NAME);
