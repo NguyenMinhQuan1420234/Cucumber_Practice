@@ -2,7 +2,7 @@ package com.tms.cucumber.steps;
 
 import com.tms.cucumber.pages.LoginPage;
 import com.tms.cucumber.context.ScenarioContext;
-import com.tms.cucumber.pages.NavigationPage;
+import com.tms.cucumber.pages.shared.NavigationPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

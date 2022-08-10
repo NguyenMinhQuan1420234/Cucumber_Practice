@@ -1,6 +1,6 @@
 package com.tms.cucumber.steps;
 
-import com.tms.cucumber.pages.NavigationPage;
+import com.tms.cucumber.pages.shared.NavigationPage;
 import com.tms.cucumber.context.ScenarioContext;
 import io.cucumber.java.en.Then;
 

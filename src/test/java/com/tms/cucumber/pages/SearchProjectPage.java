@@ -78,7 +78,9 @@ public class SearchProjectPage extends BasePage {
                     name.toLowerCase(),
                     containsString(expectedProjectName)
                 );
+                System.out.println(name);
             }
+            System.out.println("---------------------------");
             if(!(expectedLocation.equals("All"))) {
                 for(String location: listProjectLocation) {
                     assertThat(

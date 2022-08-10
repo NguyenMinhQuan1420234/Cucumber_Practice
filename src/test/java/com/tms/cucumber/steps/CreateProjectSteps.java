@@ -1,22 +1,18 @@
 package com.tms.cucumber.steps;
 
-import com.google.gson.stream.JsonReader;
 import com.tms.cucumber.context.ScenarioContext;
 import com.tms.cucumber.pages.CreateProjectPage;
-import com.tms.cucumber.pages.NavigationPage;
+import com.tms.cucumber.pages.shared.NavigationPage;
 import com.tms.cucumber.pages.modal.Project;
 import com.tms.cucumber.pages.shared.DatePickerPage;
 import com.tms.cucumber.utils.JsonUtil;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 public class CreateProjectSteps {
     NavigationPage navigationPage = new NavigationPage();

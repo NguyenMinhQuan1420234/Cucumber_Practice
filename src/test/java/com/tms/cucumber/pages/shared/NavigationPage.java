@@ -1,5 +1,6 @@
-package com.tms.cucumber.pages;
+package com.tms.cucumber.pages.shared;
 
+import com.tms.cucumber.pages.BasePage;
 import org.openqa.selenium.By;
 
 public class NavigationPage extends BasePage {

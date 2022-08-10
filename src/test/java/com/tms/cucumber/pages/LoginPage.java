@@ -1,6 +1,8 @@
 package com.tms.cucumber.pages;
 
+import com.tms.cucumber.steps.StepHooks;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
@@ -35,5 +37,9 @@ public class LoginPage extends BasePage {
         inputUsername(System.getProperty("DEFAULT_USERNAME"));
         inputPassword(System.getProperty("DEFAULT_PASSWORD"));
         clickLoginBtn();
+    }
+
+    public void loginWithApi() {
+        StepHooks.driver.manage().addCookie(new Cookie("key","value"));
     }
 }
